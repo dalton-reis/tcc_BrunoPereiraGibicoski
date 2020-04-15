@@ -1,0 +1,12 @@
+Ok - permitir visualização de objeto gráfico; 
+Ok - permitir movimentação livre da câmera; 
+Ok - aplicar operações de transformação no objeto gráfico gerado ao alterar valores na função;
+21/04/2020
+O - Explicar Interações da matriz através de botões;  
+28/04/2020
+X - permitir alteração de valores como cor e transparência do objeto 3D gerado;  
+X - possibilitar pular e assistir novamente aos tutoriais; 
+05/05/2020
+X - permitir mais de um objeto gráfico simultâneo;
+12/05/2020
+X - ser visualizável em desktop, tablet, smartphone e web; 
