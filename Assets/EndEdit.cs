@@ -23,7 +23,7 @@ public class EndEdit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainInputField.onEndEdit.AddListener(delegate { LockInput(mainInputField); });
+        //mainInputField.onEndEdit.AddListener(delegate { LockInput(mainInputField); });
     }
 
     // Update is called once per frame
