@@ -3,34 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class matriz
-{
+public class matriz{
+    public int index;   
+    public Matrix4x4 matrix;  
+    public GameObject cube;
+
     public matriz(int pIndex,Matrix4x4 pMatrix, Color pCor){
-      index = pIndex;
+      index  = pIndex;
       matrix = pMatrix;
-      cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+      cube   = GameObject.CreatePrimitive(PrimitiveType.Cube);
       cube.GetComponent<Renderer>().material.color = pCor;
       cube.name = index.ToString();
       cube.tag = "Cube";
     }
-    public int index;
-   
-    public Matrix4x4 matrix;  
-    public GameObject cube;
-
-
-
 }
 
-public class uiHandler : MonoBehaviour
-{
-    
-
- public List<matriz> allObjects;
+public class uiHandler : MonoBehaviour{
+    public List<matriz> allObjects;
     public static Matrix4x4 matrix;
-
     public static Matrix4x4 matrixSum;
-    private int wCubeIndex;
+
     public InputField field00;
     public InputField field01;
     public InputField field02;
@@ -46,10 +38,8 @@ public class uiHandler : MonoBehaviour
     public InputField field30;
     public InputField field31;
     public InputField field32;
-    public InputField field33;
-    
-    public Button btReset;
-    
+    public InputField field33;    
+    public Button btReset;    
     public Button btTransposta;
     public Button btCores;
     public Button btInsert;
@@ -60,25 +50,30 @@ public class uiHandler : MonoBehaviour
     public Button btPegaSum;
     public Button btSumSub;
     public Button btSumMult;
-    
-    private Color cor;
     public GameObject SumPanel;
-    void OnDrawGizmos()
-    {
-       // Gizmos.color = new Color(0.75f, 0.0f, 0.0f, 0.75f);
-
-        // Convert the local coordinate values into world
-        // coordinates for the matrix transformation.
+    public Text xyzShow;
+    
+    private int wCubeIndex;
+    private Color cor;  
+    private float strToFloat(InputField prImp){
+        if ((prImp.text == null) | (prImp.text == "")){
+            return  0;
+        } 
+        else {
+            return float.Parse(prImp.text) ;
+        }
+    }
+    void OnDrawGizmos(){
        Gizmos.matrix = transform.localToWorldMatrix;
        Gizmos.DrawCube(Vector3.zero, Vector3.one);
     }
-
-    void Start()
-    {
+    void Start(){
+        //Inicialização de variáveis
         btCloseSumClick();
-        allObjects= new List<matriz>();
+        allObjects = new List<matriz>();
         wCubeIndex = 0;
-        cor = Color.yellow;
+        cor        = Color.yellow;
+        //Ligando eventos aos seus respectivos botões
         btTransposta.onClick.AddListener(btTranspostaClick); 
         btReset.onClick.AddListener(btResetClick);
         btCores.onClick.AddListener(btCoresClick);
@@ -90,17 +85,7 @@ public class uiHandler : MonoBehaviour
         btPegaSum.onClick.AddListener(btPegaSumClick);
         btSumSub.onClick.AddListener(btSumSubClick);
         btSumMult.onClick.AddListener(btSumMultClick);
-        
-        
-        
-
-//List<GameObject> selected = new List<GameObject>();
- //while ( selected.Count < 5 ) {
- //  int randomIndex = Random.Range( 0, allObjects.Count );
- //  if ( !selected.Contains( allObjects[randomIndex] ) )
-  //   selected.Add( allObjects[randomIndex] );
-// }
-
+        //Inicializando a matriz
         field00.text = "1";
         field01.text = "0";
         field02.text = "0";
@@ -121,110 +106,96 @@ public class uiHandler : MonoBehaviour
         field32.text = "0";
         field33.text = "1";
 
-
-        var Col0 = new Vector4(float.Parse(field00.text), float.Parse(field01.text), float.Parse(field02.text), float.Parse(field03.text));
-        var Col1 = new Vector4(float.Parse(field10.text), float.Parse(field11.text), float.Parse(field12.text), float.Parse(field13.text));
-        var Col2 = new Vector4(float.Parse(field20.text), float.Parse(field21.text), float.Parse(field22.text), float.Parse(field23.text));
-        var Col3 = new Vector4(float.Parse(field30.text), float.Parse(field31.text), float.Parse(field32.text), float.Parse(field33.text));
+        var Col0 = new Vector4(strToFloat(field00), strToFloat(field10), strToFloat(field20), strToFloat(field30));
+        var Col1 = new Vector4(strToFloat(field01), strToFloat(field11), strToFloat(field21), strToFloat(field31));
+        var Col2 = new Vector4(strToFloat(field02), strToFloat(field12), strToFloat(field22), strToFloat(field32));
+        var Col3 = new Vector4(strToFloat(field03), strToFloat(field13), strToFloat(field23), strToFloat(field33));
 
         matrix.SetColumn(0, Col0);
         matrix.SetColumn(1, Col1);
         matrix.SetColumn(2, Col2);
         matrix.SetColumn(3, Col3);
-        //var m = Matrix4x4.TRS(position, rotation, scale);
-        //cube.transform.position = position;
-        //cube.transform.rotation = rotation;
-        //cube.transform. = position;
         
         matriz m = new matriz(wCubeIndex,matrix,cor);
         allObjects.Add(m);
-        //public matriz(int pIndex,Matrix4x4 pMatrix, Color pCor)
+        xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
+                       "/Y:"+ allObjects[wCubeIndex].cube.transform.position.y +
+                       "Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
     }
-
     void btCoresClick(){
-    if (cor == Color.yellow){
-        cor = Color.blue;
-
-    }else
-    if (cor == Color.blue){
-    cor = Color.cyan;
-
-    }else
-    if (cor == Color.cyan){
-    cor = Color.grey;
-
-    }else
-    if (cor == Color.grey){
-    cor = Color.green;
-
-    }else
-    if (cor == Color.green){
-    cor = Color.white;
-
-    }else
-    if (cor == Color.white){
-    cor = Color.red;
-
-    }else
-    if (cor == Color.red){
-    cor = Color.magenta;
-    
-    }else{
-    cor = Color.yellow;
+        //Rotina que altera cor do polígono
+        if (cor == Color.yellow){
+            cor = Color.blue;
+        }else
+        if (cor == Color.blue){
+            cor = Color.cyan;
+        }else
+        if (cor == Color.cyan){
+            cor = Color.grey;
+        }else
+        if (cor == Color.grey){
+            cor = Color.green;
+        }else
+        if (cor == Color.green){
+            cor = Color.white;
+        }else
+        if (cor == Color.white){
+            cor = Color.red;
+        }else
+        if (cor == Color.red){
+            cor = Color.magenta;   
+        }else{
+            cor = Color.yellow;
+        }
     }
-    
-    
-
-    }
-
     void btTranspostaClick(){
-        //string f00;
+        //Rotina que converte a matriz na matriz transposta
         string f01 = field01.text;
         string f02 = field02.text;
         string f03 = field03.text;
+
         string f10 = field10.text;
-        //string f11;
         string f12 = field12.text;
         string f13 = field13.text;
+
         string f20 = field20.text;
         string f21 = field21.text;
-        //string f22;
         string f23 = field23.text;
+
         string f30 = field30.text;
         string f31 = field31.text;
         string f32 = field32.text;
-        //string f33;
-        //field00.text = "1";
+        
         field01.text = f10;
         field02.text = f20;
         field03.text = f30;
 
         field10.text = f01;
-        //field11.text = "1";
         field12.text = f21;
         field13.text = f31;
 
         field20.text = f02;
         field21.text = f12;
-        //field22.text = "1";
         field23.text = f32;
 
         field30.text = f03;
         field31.text = f13;
         field32.text = f23;
-        //field33.text = "1";
     }
-
     void btInsertClick(){
+        //Rotina que insere mais um polígono
         wCubeIndex = wCubeIndex + 1;
         btCoresClick();
         btResetClick();
         matriz m = new matriz(wCubeIndex,matrix,cor);
         allObjects.Add(m);
+        xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
+                       "/Y:"+ allObjects[wCubeIndex].cube.transform.position.y +
+                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
     }
-    void btResetClick()
-    {
-         field00.text = "1";
+    void btResetClick(){
+        //Rotina que converte a matriz para a matriz identidade
+        field00.text = "1";
         field01.text = "0";
         field02.text = "0";
         field03.text = "0";
@@ -244,11 +215,10 @@ public class uiHandler : MonoBehaviour
         field32.text = "0";
         field33.text = "1";
 
-
-        var Col0 = new Vector4(float.Parse(field00.text), float.Parse(field01.text), float.Parse(field02.text), float.Parse(field03.text));
-        var Col1 = new Vector4(float.Parse(field10.text), float.Parse(field11.text), float.Parse(field12.text), float.Parse(field13.text));
-        var Col2 = new Vector4(float.Parse(field20.text), float.Parse(field21.text), float.Parse(field22.text), float.Parse(field23.text));
-        var Col3 = new Vector4(float.Parse(field30.text), float.Parse(field31.text), float.Parse(field32.text), float.Parse(field33.text));
+        var Col0 = new Vector4(strToFloat(field00), strToFloat(field10), strToFloat(field20), strToFloat(field30));
+        var Col1 = new Vector4(strToFloat(field01), strToFloat(field11), strToFloat(field21), strToFloat(field31));
+        var Col2 = new Vector4(strToFloat(field02), strToFloat(field12), strToFloat(field22), strToFloat(field32));
+        var Col3 = new Vector4(strToFloat(field03), strToFloat(field13), strToFloat(field23), strToFloat(field33));
 
         matrix.SetColumn(0, Col0);
         matrix.SetColumn(1, Col1);
@@ -256,94 +226,79 @@ public class uiHandler : MonoBehaviour
         matrix.SetColumn(3, Col3);
 
         Debug.Log("Restart:");
-        Debug.Log(matrix.GetColumn(0));
-        Debug.Log(matrix.GetColumn(1));
-        Debug.Log(matrix.GetColumn(2));
-        Debug.Log(matrix.GetColumn(3));
+        Debug.Log(matrix.ToString());
     }
-
     void btDeleteClick(){
-        
-        //GameObject cube = allObjects[wCubeIndex];
+        //Rotina que deleta o polígono atual
         if (allObjects.Count > 1){
             Destroy(allObjects[wCubeIndex].cube);
             allObjects.Remove(allObjects[wCubeIndex]);
-            wCubeIndex = allObjects.Count - 1;
-            cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
-            matrix = allObjects[wCubeIndex].matrix;
+            wCubeIndex   = allObjects.Count - 1;
+            cor          = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
+            matrix       = allObjects[wCubeIndex].matrix;
             field00.text = matrix.m00.ToString();
-            field01.text = matrix.m10.ToString();
-            field02.text = matrix.m20.ToString();
-            field03.text = matrix.m30.ToString();
-            field10.text = matrix.m01.ToString();
+            field01.text = matrix.m01.ToString();
+            field02.text = matrix.m02.ToString();
+            field03.text = matrix.m03.ToString();
+            field10.text = matrix.m10.ToString();
             field11.text = matrix.m11.ToString();
-            field12.text = matrix.m21.ToString();
-            field13.text = matrix.m31.ToString();
-            field20.text = matrix.m02.ToString();
-            field21.text = matrix.m12.ToString();
+            field12.text = matrix.m12.ToString();
+            field13.text = matrix.m13.ToString();
+            field20.text = matrix.m20.ToString();
+            field21.text = matrix.m21.ToString();
             field22.text = matrix.m22.ToString();
-            field23.text = matrix.m32.ToString();
-            field30.text = matrix.m03.ToString();
-            field31.text = matrix.m13.ToString();
-            field32.text = matrix.m23.ToString();
+            field23.text = matrix.m23.ToString();
+            field30.text = matrix.m30.ToString();
+            field31.text = matrix.m31.ToString();
+            field32.text = matrix.m32.ToString();
             field33.text = matrix.m33.ToString();
         } else{
         btResetClick();
-
         }
     }
-        void Update()
-    {
-     
-     if (Input.GetMouseButtonDown(0))
-     {
-         Debug.Log("Mouse is down");
-         
-         RaycastHit hitInfo = new RaycastHit();
-         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-         if (hit) 
-         {
-             Debug.Log("name: " + hitInfo.transform.gameObject.name);
-             Debug.Log("tag: " + hitInfo.transform.gameObject.tag);
-             if (hitInfo.transform.gameObject.tag == "Cube")
-             {
-            wCubeIndex = int.Parse(hitInfo.transform.gameObject.name);
-            cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
-            matrix = allObjects[wCubeIndex].matrix;
-            field00.text = matrix.m00.ToString();
-            field01.text = matrix.m10.ToString();
-            field02.text = matrix.m20.ToString();
-            field03.text = matrix.m30.ToString();
-            field10.text = matrix.m01.ToString();
-            field11.text = matrix.m11.ToString();
-            field12.text = matrix.m21.ToString();
-            field13.text = matrix.m31.ToString();
-            field20.text = matrix.m02.ToString();
-            field21.text = matrix.m12.ToString();
-            field22.text = matrix.m22.ToString();
-            field23.text = matrix.m32.ToString();
-            field30.text = matrix.m03.ToString();
-            field31.text = matrix.m13.ToString();
-            field32.text = matrix.m23.ToString();
-            field33.text = matrix.m33.ToString();
-
-                 Debug.Log ("It's working!");
-             } else {
-                 Debug.Log ("nopz " + hitInfo.transform.gameObject.tag);
-             }
-         } else {
-             Debug.Log("No hit");
-         }
-         Debug.Log("Mouse is down");
-     } 
-
+    void Update(){
+        //Rotina padrão que é ativada uma vez por frame
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hitInfo = new RaycastHit();
+            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            if (hit){
+                //Debug.Log("name: " + hitInfo.transform.gameObject.name);
+                //Debug.Log("tag: " + hitInfo.transform.gameObject.tag);
+                if (hitInfo.transform.gameObject.tag == "Cube"){
+                    wCubeIndex = int.Parse(hitInfo.transform.gameObject.name);
+                    cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
+                    matrix = allObjects[wCubeIndex].matrix;
+                    field00.text = matrix.m00.ToString();
+                    field01.text = matrix.m01.ToString();
+                    field02.text = matrix.m02.ToString();
+                    field03.text = matrix.m03.ToString();
+                    field10.text = matrix.m10.ToString();
+                    field11.text = matrix.m11.ToString();
+                    field12.text = matrix.m12.ToString();
+                    field13.text = matrix.m13.ToString();
+                    field20.text = matrix.m20.ToString();
+                    field21.text = matrix.m21.ToString();
+                    field22.text = matrix.m22.ToString();
+                    field23.text = matrix.m23.ToString();
+                    field30.text = matrix.m30.ToString();
+                    field31.text = matrix.m31.ToString();
+                    field32.text = matrix.m32.ToString();
+                    field33.text = matrix.m33.ToString();
+                } else {
+                    //Debug.Log ("nopz " + hitInfo.transform.gameObject.tag);
+                }
+            }
+            //else {
+            //    Debug.Log("No hit");
+            //}
+        } 
         allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color = cor;
-        var Col0 = new Vector4(float.Parse(field00.text), float.Parse(field01.text), float.Parse(field02.text), float.Parse(field03.text));
-        var Col1 = new Vector4(float.Parse(field10.text), float.Parse(field11.text), float.Parse(field12.text), float.Parse(field13.text));
-        var Col2 = new Vector4(float.Parse(field20.text), float.Parse(field21.text), float.Parse(field22.text), float.Parse(field23.text));
-        var Col3 = new Vector4(float.Parse(field30.text), float.Parse(field31.text), float.Parse(field32.text), float.Parse(field33.text));
 
-        
+        var Col0 = new Vector4(strToFloat(field00), strToFloat(field10), strToFloat(field20), strToFloat(field30));
+        var Col1 = new Vector4(strToFloat(field01), strToFloat(field11), strToFloat(field21), strToFloat(field31));
+        var Col2 = new Vector4(strToFloat(field02), strToFloat(field12), strToFloat(field22), strToFloat(field32));
+        var Col3 = new Vector4(strToFloat(field03), strToFloat(field13), strToFloat(field23), strToFloat(field33));
 
         matrix.SetColumn(0, Col0);
         matrix.SetColumn(1, Col1);
@@ -355,37 +310,33 @@ public class uiHandler : MonoBehaviour
         forward.x = matrix.m02;
         forward.y = matrix.m12;
         forward.z = matrix.m22;
+        
         Vector3 upwards;
         upwards.x = matrix.m01;
         upwards.y = matrix.m11;
         upwards.z = matrix.m21;
         allObjects[wCubeIndex].cube.transform.rotation = Quaternion.LookRotation(forward, upwards);
-
+       
         //scale
         Vector3 scale;
         scale.x = new Vector4(matrix.m00, matrix.m10, matrix.m20, matrix.m30).magnitude;
         scale.y = new Vector4(matrix.m01, matrix.m11, matrix.m21, matrix.m31).magnitude;
         scale.z = new Vector4(matrix.m02, matrix.m12, matrix.m22, matrix.m32).magnitude;
         allObjects[wCubeIndex].cube.transform.localScale = scale;
-
+        
         //position
         Vector3 position;
         position.x = matrix.m03;
         position.y = matrix.m13;
         position.z = matrix.m23;
         allObjects[wCubeIndex].cube.transform.position = position;
-
-        
         allObjects[wCubeIndex].matrix = matrix;
-
-        Debug.Log("Update:");
-        Debug.Log(matrix.GetColumn(0));
-        Debug.Log(matrix.GetColumn(1));
-        Debug.Log(matrix.GetColumn(2));
-        Debug.Log(matrix.GetColumn(3));
-
+        Debug.Log(matrix.ToString());
+        
+        xyzShow.text = "X:"  + allObjects[wCubeIndex].cube.transform.position.x +
+                       "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
+                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
     }
-
     void btSumClick(){
 
         if (SumPanel != null)
@@ -469,61 +420,18 @@ public class uiHandler : MonoBehaviour
               
             if (obj.GetComponentInChildren<InputField>() != null){
                 InputField maField = obj.GetComponentInChildren<InputField>();
-                maField.text = "0";
-                
-                //Debug.Log(maField.name);
-                // switch (maField.name){
-                //    case "mbfield00":
-                //    maField.text = "1";
-                //    break;
-                //    case "mbfield11":
-                //    maField.text = "1";
-                //    break;
-                //    case "mbfield22":
-                //    maField.text = "1";
-                //    break;
-                //    case "mbfield33":
-                //    maField.text = "1";
-                //    break;
-                  
-                //    default:
-                //    maField.text = "0";
-                //    break; 
-                     
-                // }
-                
+                maField.text = "0";                
             } 
          }
         FoundObject = GameObject.FindGameObjectsWithTag("editSomaMc");
 
          foreach (GameObject obj in FoundObject) {
              
-             obj.SetActive (true); 
+            obj.SetActive (true); 
               
             if (obj.GetComponentInChildren<InputField>() != null){
                 InputField maField = obj.GetComponentInChildren<InputField>();
-                maField.text = "0";
-                //Debug.Log(maField.name);
-                // switch (maField.name){
-                //    case "mcfield00":
-                //    maField.text = "1";
-                //    break;
-                //    case "mcfield11":
-                //    maField.text = "1";
-                //    break;
-                //    case "mcfield22":
-                //    maField.text = "1";
-                //    break;
-                //    case "mcfield33":
-                //    maField.text = "1";
-                //    break;
-                  
-                //    default:
-                //    maField.text = "0";
-                //    break; 
-                     
-                // }
-                
+                maField.text = "0";                
             } 
          } 
         
@@ -622,8 +530,7 @@ public class uiHandler : MonoBehaviour
         GameObject.Find("/Canvas/Panel/MatrixPos/mcfield33").GetComponentInChildren<InputField>().text = matrixSum.m33.ToString();
          
     }
-
-       void btSumMultClick(){
+    void btSumMultClick(){
        
         var Col0 = new Vector4(
             ((float.Parse(GameObject.Find("/Canvas/Panel/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/Panel/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +

@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
     public float speedh;
     public float speedv;
     public float sens;
-    private float yaw = 0.0f;
+    private float yaw = 225.0f;
     private float pitch = 0.0f;
     private float Zew = 0.0f;
     private GameObject MyCamera;
@@ -20,17 +20,17 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)){
+        if (Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.UpArrow)){
             MyCamera.transform.Translate(Vector3.forward * sens);
         //transform.position = ;
         }
-        if (Input.GetKey(KeyCode.A)){
+        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow)){
            MyCamera.transform.Translate(Vector3.left * sens);
         }
-        if (Input.GetKey(KeyCode.S)){
+        if (Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.DownArrow)){
            MyCamera.transform.Translate(Vector3.back * sens);
         }
-        if (Input.GetKey(KeyCode.D)){
+        if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow)){
            MyCamera.transform.Translate(Vector3.right * sens);
         }
 

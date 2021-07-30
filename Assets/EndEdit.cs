@@ -16,6 +16,7 @@ public class EndEdit : MonoBehaviour
         else if (input.text.Length == 0)
         {
             Debug.Log("Main Input Empty");
+            input.text = "";   
         }
 
     }
