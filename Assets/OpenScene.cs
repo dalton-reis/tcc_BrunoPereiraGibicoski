@@ -7,13 +7,25 @@ using UnityEngine.SceneManagement;
 public class OpenScene : MonoBehaviour
 {
     
-	public Button btMatrix;
+	public Button btMatrixScene;
+	public Button btSplineScene;
+	public Button btClose;
+
     void Start()
     {
-		btMatrix.onClick.AddListener(matrixSceneOpener);         
+		btMatrixScene.onClick.AddListener(matrixSceneOpener);   
+		btSplineScene.onClick.AddListener(splineSceneOpener);       
+		btClose.onClick.AddListener(appCloser);        
     }
     void matrixSceneOpener(){
        SceneManager.LoadScene("MatrixScene", LoadSceneMode.Single); 
     }
+     void splineSceneOpener(){
+       SceneManager.LoadScene("SplineScene", LoadSceneMode.Single); 
+    }
+    void appCloser(){
+       Application.Quit();
+    }
+
 
 }

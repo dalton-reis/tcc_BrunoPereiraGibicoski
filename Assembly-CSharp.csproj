@@ -51,7 +51,9 @@
      <Compile Include="Assets\OpenScene.cs" />
      <Compile Include="Assets\ResetScript.cs" />
      <Compile Include="Assets\SumPanel.cs" />
+     <Compile Include="Assets\tooltip.cs" />
      <Compile Include="Assets\uiHandler.cs" />
+     <Compile Include="Assets\uiHandlerSpline.cs" />
      <None Include="Assets\Arch.shader" />
      <None Include="Assets\CartesianCoordinates\Contents\cartesiancoord.hlsl" />
  <Reference Include="Unity.Timeline.Editor">

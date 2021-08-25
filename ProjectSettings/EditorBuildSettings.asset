@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatrixScene.unity
     guid: 831463557d609624d8ddd925db6cbb7d
+  - enabled: 1
+    path: Assets/Scenes/SplineScene.unity
+    guid: afb106d66cdecb04e84da8fbc71df703
   m_configObjects: {}
