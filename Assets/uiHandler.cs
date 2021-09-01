@@ -80,7 +80,6 @@ public class uiHandler : MonoBehaviour{
         btReset.onClick.AddListener(btResetClick);
         btCores.onClick.AddListener(btCoresClick);
         btInsert.onClick.AddListener(btInsertClick);
-        btDelete.onClick.AddListener(btDeleteClick);
         btSum.onClick.AddListener(btSumClick);
         btCloseSum.onClick.AddListener(btCloseSumClick);
         btSumSum.onClick.AddListener(btSumSumClick);
@@ -350,7 +349,8 @@ public class uiHandler : MonoBehaviour{
             {
              SumPanel.SetActive(true);
             }
-
+        GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(false);
+        GameObject.Find("/Canvas/pnMath/lbSig").SetActive(false);
         GameObject[] FoundObject = GameObject.FindGameObjectsWithTag("editSomaMa");
 
          foreach (GameObject obj in FoundObject) {
@@ -447,8 +447,10 @@ public class uiHandler : MonoBehaviour{
     void btCloseSumClick(){
             SumPanel.SetActive(false);
     }
-    void btSumSumClick(){
-       
+    void btSumSumClick(){       
+        GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "+";
         var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text), 
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text), 
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text), 
@@ -493,7 +495,9 @@ public class uiHandler : MonoBehaviour{
          
     }
     void btSumSubClick(){
-       
+        GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "-";
         var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text), 
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text), 
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text), 
@@ -538,7 +542,9 @@ public class uiHandler : MonoBehaviour{
          
     }
     void btSumMultClick(){
-       
+        GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
+        GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "*";
         var Col0 = new Vector4(
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text)) +
