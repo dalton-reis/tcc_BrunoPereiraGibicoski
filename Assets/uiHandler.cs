@@ -4,22 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class matriz{
-    public int index;   
-    public Matrix4x4 matrix;  
+public class matriz
+{
+    public int index;
+    public Matrix4x4 matrix;
     public GameObject cube;
 
-    public matriz(int pIndex,Matrix4x4 pMatrix, Color pCor){
-      index  = pIndex;
-      matrix = pMatrix;
-      cube   = GameObject.CreatePrimitive(PrimitiveType.Cube);
-      cube.GetComponent<Renderer>().material.color = pCor;
-      cube.name = index.ToString();
-      cube.tag = "Cube";
+    public matriz(int pIndex, Matrix4x4 pMatrix, Color pCor)
+    {
+        index = pIndex;
+        matrix = pMatrix;
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.GetComponent<Renderer>().material.color = pCor;
+        cube.name = index.ToString();
+        cube.tag = "Cube";
     }
 }
 
-public class uiHandler : MonoBehaviour{
+public class uiHandler : MonoBehaviour
+{
     public List<matriz> allObjects;
     public static Matrix4x4 matrix;
     public static Matrix4x4 matrixSum;
@@ -39,8 +42,8 @@ public class uiHandler : MonoBehaviour{
     public InputField field30;
     public InputField field31;
     public InputField field32;
-    public InputField field33;    
-    public Button btReset;    
+    public InputField field33;
+    public Button btReset;
     public Button btTransposta;
     public Button btCores;
     public Button btInsert;
@@ -54,29 +57,34 @@ public class uiHandler : MonoBehaviour{
     public Button btVoltar;
     public GameObject SumPanel;
     public Text xyzShow;
-    
+
     private int wCubeIndex;
-    private Color cor;  
-    private float strToFloat(InputField prImp){
-        if ((prImp.text == null) | (prImp.text == "")){
-            return  0;
-        } 
-        else {
-            return float.Parse(prImp.text) ;
+    private Color cor;
+    private float strToFloat(InputField prImp)
+    {
+        if ((prImp.text == null) | (prImp.text == ""))
+        {
+            return 0;
+        }
+        else
+        {
+            return float.Parse(prImp.text);
         }
     }
-    void OnDrawGizmos(){
-       Gizmos.matrix = transform.localToWorldMatrix;
-       Gizmos.DrawCube(Vector3.zero, Vector3.one);
+    void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawCube(Vector3.zero, Vector3.one);
     }
-    void Start(){
+    void Start()
+    {
         //Inicialização de variáveis
         btCloseSumClick();
         allObjects = new List<matriz>();
         wCubeIndex = 0;
-        cor        = Color.yellow;
+        cor = Color.yellow;
         //Ligando eventos aos seus respectivos botões
-        btTransposta.onClick.AddListener(btTranspostaClick); 
+        btTransposta.onClick.AddListener(btTranspostaClick);
         btReset.onClick.AddListener(btResetClick);
         btCores.onClick.AddListener(btCoresClick);
         btInsert.onClick.AddListener(btInsertClick);
@@ -117,44 +125,62 @@ public class uiHandler : MonoBehaviour{
         matrix.SetColumn(1, Col1);
         matrix.SetColumn(2, Col2);
         matrix.SetColumn(3, Col3);
-        
-        matriz m = new matriz(wCubeIndex,matrix,cor);
+
+        matriz m = new matriz(wCubeIndex, matrix, cor);
         allObjects.Add(m);
         xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
-                       "/Y:"+ allObjects[wCubeIndex].cube.transform.position.y +
-                       "Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
+                       "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
+                       "Z:" + allObjects[wCubeIndex].cube.transform.position.z;
     }
 
-    void btVoltarClick(){
-       SceneManager.LoadScene("MainScene", LoadSceneMode.Single); 
+    void btVoltarClick()
+    {
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
-    void btCoresClick(){
+    void btCoresClick()
+    {
         //Rotina que altera cor do polígono
-        if (cor == Color.yellow){
+        if (cor == Color.yellow)
+        {
             cor = Color.blue;
-        }else
-        if (cor == Color.blue){
+        }
+        else
+        if (cor == Color.blue)
+        {
             cor = Color.cyan;
-        }else
-        if (cor == Color.cyan){
+        }
+        else
+        if (cor == Color.cyan)
+        {
             cor = Color.grey;
-        }else
-        if (cor == Color.grey){
+        }
+        else
+        if (cor == Color.grey)
+        {
             cor = Color.green;
-        }else
-        if (cor == Color.green){
+        }
+        else
+        if (cor == Color.green)
+        {
             cor = Color.white;
-        }else
-        if (cor == Color.white){
+        }
+        else
+        if (cor == Color.white)
+        {
             cor = Color.red;
-        }else
-        if (cor == Color.red){
-            cor = Color.magenta;   
-        }else{
+        }
+        else
+        if (cor == Color.red)
+        {
+            cor = Color.magenta;
+        }
+        else
+        {
             cor = Color.yellow;
         }
     }
-    void btTranspostaClick(){
+    void btTranspostaClick()
+    {
         //Rotina que converte a matriz na matriz transposta
         string f01 = field01.text;
         string f02 = field02.text;
@@ -171,7 +197,7 @@ public class uiHandler : MonoBehaviour{
         string f30 = field30.text;
         string f31 = field31.text;
         string f32 = field32.text;
-        
+
         field01.text = f10;
         field02.text = f20;
         field03.text = f30;
@@ -188,18 +214,20 @@ public class uiHandler : MonoBehaviour{
         field31.text = f13;
         field32.text = f23;
     }
-    void btInsertClick(){
+    void btInsertClick()
+    {
         //Rotina que insere mais um polígono
         wCubeIndex = wCubeIndex + 1;
         btCoresClick();
         btResetClick();
-        matriz m = new matriz(wCubeIndex,matrix,cor);
+        matriz m = new matriz(wCubeIndex, matrix, cor);
         allObjects.Add(m);
         xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
-                       "/Y:"+ allObjects[wCubeIndex].cube.transform.position.y +
-                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
+                       "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
+                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z;
     }
-    void btResetClick(){
+    void btResetClick()
+    {
         //Rotina que converte a matriz para a matriz identidade
         field00.text = "1";
         field01.text = "0";
@@ -234,14 +262,16 @@ public class uiHandler : MonoBehaviour{
         Debug.Log("Restart:");
         Debug.Log(matrix.ToString());
     }
-    void btDeleteClick(){
+    void btDeleteClick()
+    {
         //Rotina que deleta o polígono atual
-        if (allObjects.Count > 1){
+        if (allObjects.Count > 1)
+        {
             Destroy(allObjects[wCubeIndex].cube);
             allObjects.Remove(allObjects[wCubeIndex]);
-            wCubeIndex   = allObjects.Count - 1;
-            cor          = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
-            matrix       = allObjects[wCubeIndex].matrix;
+            wCubeIndex = allObjects.Count - 1;
+            cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
+            matrix = allObjects[wCubeIndex].matrix;
             field00.text = matrix.m00.ToString();
             field01.text = matrix.m01.ToString();
             field02.text = matrix.m02.ToString();
@@ -258,20 +288,25 @@ public class uiHandler : MonoBehaviour{
             field31.text = matrix.m31.ToString();
             field32.text = matrix.m32.ToString();
             field33.text = matrix.m33.ToString();
-        } else{
-        btResetClick();
+        }
+        else
+        {
+            btResetClick();
         }
     }
-    void Update(){
+    void Update()
+    {
         //Rotina padrão que é ativada uma vez por frame
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            if (hit){
+            if (hit)
+            {
                 //Debug.Log("name: " + hitInfo.transform.gameObject.name);
                 //Debug.Log("tag: " + hitInfo.transform.gameObject.tag);
-                if (hitInfo.transform.gameObject.tag == "Cube"){
+                if (hitInfo.transform.gameObject.tag == "Cube")
+                {
                     wCubeIndex = int.Parse(hitInfo.transform.gameObject.name);
                     cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
                     matrix = allObjects[wCubeIndex].matrix;
@@ -291,14 +326,16 @@ public class uiHandler : MonoBehaviour{
                     field31.text = matrix.m31.ToString();
                     field32.text = matrix.m32.ToString();
                     field33.text = matrix.m33.ToString();
-                } else {
+                }
+                else
+                {
                     //Debug.Log ("nopz " + hitInfo.transform.gameObject.tag);
                 }
             }
             //else {
             //    Debug.Log("No hit");
             //}
-        } 
+        }
         allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color = cor;
 
         var Col0 = new Vector4(strToFloat(field00), strToFloat(field10), strToFloat(field20), strToFloat(field30));
@@ -316,20 +353,20 @@ public class uiHandler : MonoBehaviour{
         forward.x = matrix.m02;
         forward.y = matrix.m12;
         forward.z = matrix.m22;
-        
+
         Vector3 upwards;
         upwards.x = matrix.m01;
         upwards.y = matrix.m11;
         upwards.z = matrix.m21;
         allObjects[wCubeIndex].cube.transform.rotation = Quaternion.LookRotation(forward, upwards);
-       
+
         //scale
         Vector3 scale;
         scale.x = new Vector4(matrix.m00, matrix.m10, matrix.m20, matrix.m30).magnitude;
         scale.y = new Vector4(matrix.m01, matrix.m11, matrix.m21, matrix.m31).magnitude;
         scale.z = new Vector4(matrix.m02, matrix.m12, matrix.m22, matrix.m32).magnitude;
         allObjects[wCubeIndex].cube.transform.localScale = scale;
-        
+
         //position
         Vector3 position;
         position.x = matrix.m03;
@@ -338,143 +375,153 @@ public class uiHandler : MonoBehaviour{
         allObjects[wCubeIndex].cube.transform.position = position;
         allObjects[wCubeIndex].matrix = matrix;
         Debug.Log(matrix.ToString());
-        
-        xyzShow.text = "X:"  + allObjects[wCubeIndex].cube.transform.position.x +
+
+        xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
                        "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
-                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z; 
+                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z;
     }
-    void btSumClick(){
+    void btSumClick()
+    {
 
         if (SumPanel != null)
-            {
-             SumPanel.SetActive(true);
-            }
+        {
+            SumPanel.SetActive(true);
+        }
         GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(false);
         GameObject.Find("/Canvas/pnMath/lbSig").SetActive(false);
         GameObject[] FoundObject = GameObject.FindGameObjectsWithTag("editSomaMa");
 
-         foreach (GameObject obj in FoundObject) {
-             
-             obj.SetActive (true); 
-              
-            if (obj.GetComponentInChildren<InputField>() != null){
+        foreach (GameObject obj in FoundObject)
+        {
+
+            obj.SetActive(true);
+
+            if (obj.GetComponentInChildren<InputField>() != null)
+            {
                 InputField maField = obj.GetComponentInChildren<InputField>();
-                
+
                 //Debug.Log(maField.name);
-                switch (maField.name){
-                   case "mafield00":
-                   maField.text = matrix.m00.ToString();
-                   break;
-                   case "mafield01":
-                   maField.text = matrix.m01.ToString();
-                   break;
-                   case "mafield02":
-                   maField.text = matrix.m02.ToString();
-                   break;
-                   case "mafield03":
-                   maField.text = matrix.m03.ToString();
-                   break;
-                   case "mafield10":
-                   maField.text = matrix.m10.ToString();
-                   break;
-                   case "mafield11":
-                   maField.text = matrix.m11.ToString();
-                   break;
-                   case "mafield12":
-                   maField.text = matrix.m12.ToString();
-                   break;
-                   case "mafield13":
-                   maField.text = matrix.m13.ToString();
-                   break;
-                   case "mafield20":
-                   maField.text = matrix.m20.ToString();
-                   break;
-                   case "mafield21":
-                   maField.text = matrix.m21.ToString();
-                   break;
-                   case "mafield22":
-                   maField.text = matrix.m22.ToString();
-                   break;
-                   case "mafield23":
-                   maField.text = matrix.m23.ToString();
-                   break;
-                   case "mafield30":
-                   maField.text = matrix.m30.ToString();
-                   break;
-                   case "mafield31":
-                   maField.text = matrix.m31.ToString();
-                   break;
-                   case "mafield32":
-                   maField.text = matrix.m32.ToString();
-                   break;
-                   case "mafield33":
-                   maField.text = matrix.m33.ToString();
-                   break;
-                  
-                   default:
-                   maField.text = "0";
-                   break; 
-                     
+                switch (maField.name)
+                {
+                    case "mafield00":
+                        maField.text = matrix.m00.ToString();
+                        break;
+                    case "mafield01":
+                        maField.text = matrix.m01.ToString();
+                        break;
+                    case "mafield02":
+                        maField.text = matrix.m02.ToString();
+                        break;
+                    case "mafield03":
+                        maField.text = matrix.m03.ToString();
+                        break;
+                    case "mafield10":
+                        maField.text = matrix.m10.ToString();
+                        break;
+                    case "mafield11":
+                        maField.text = matrix.m11.ToString();
+                        break;
+                    case "mafield12":
+                        maField.text = matrix.m12.ToString();
+                        break;
+                    case "mafield13":
+                        maField.text = matrix.m13.ToString();
+                        break;
+                    case "mafield20":
+                        maField.text = matrix.m20.ToString();
+                        break;
+                    case "mafield21":
+                        maField.text = matrix.m21.ToString();
+                        break;
+                    case "mafield22":
+                        maField.text = matrix.m22.ToString();
+                        break;
+                    case "mafield23":
+                        maField.text = matrix.m23.ToString();
+                        break;
+                    case "mafield30":
+                        maField.text = matrix.m30.ToString();
+                        break;
+                    case "mafield31":
+                        maField.text = matrix.m31.ToString();
+                        break;
+                    case "mafield32":
+                        maField.text = matrix.m32.ToString();
+                        break;
+                    case "mafield33":
+                        maField.text = matrix.m33.ToString();
+                        break;
+
+                    default:
+                        maField.text = "0";
+                        break;
+
                 }
-                
-            } 
-         }
+
+            }
+        }
         FoundObject = GameObject.FindGameObjectsWithTag("editSomaMb");
 
-         foreach (GameObject obj in FoundObject) {
-             
-             obj.SetActive (true); 
-              
-            if (obj.GetComponentInChildren<InputField>() != null){
+        foreach (GameObject obj in FoundObject)
+        {
+
+            obj.SetActive(true);
+
+            if (obj.GetComponentInChildren<InputField>() != null)
+            {
                 InputField maField = obj.GetComponentInChildren<InputField>();
-                maField.text = "0";                
-            } 
-         }
+                maField.text = "0";
+            }
+        }
         FoundObject = GameObject.FindGameObjectsWithTag("editSomaMc");
 
-         foreach (GameObject obj in FoundObject) {
-             
-            obj.SetActive (true); 
-              
-            if (obj.GetComponentInChildren<InputField>() != null){
+        foreach (GameObject obj in FoundObject)
+        {
+
+            obj.SetActive(true);
+
+            if (obj.GetComponentInChildren<InputField>() != null)
+            {
                 InputField maField = obj.GetComponentInChildren<InputField>();
-                maField.text = "0";                
-            } 
-         } 
-        
+                maField.text = "0";
+            }
+        }
+
 
     }
-    void btCloseSumClick(){
-            SumPanel.SetActive(false);
+    void btCloseSumClick()
+    {
+        SumPanel.SetActive(false);
     }
-    void btSumSumClick(){       
+    void btSumSumClick()
+    {
         GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "+";
-        var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text), 
+        var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text));
-        
-        var Col1 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text), 
+
+        var Col1 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text));
-        
-        var Col2 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text), 
+
+        var Col2 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text));
-        
-        var Col3 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text), 
+
+        var Col3 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield33").GetComponentInChildren<InputField>().text) + float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text));
 
         matrixSum.SetColumn(0, Col0);
         matrixSum.SetColumn(1, Col1);
         matrixSum.SetColumn(2, Col2);
-        matrixSum.SetColumn(3, Col3);       
+        matrixSum.SetColumn(3, Col3);
 
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield00").GetComponentInChildren<InputField>().text = matrixSum.m00.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield01").GetComponentInChildren<InputField>().text = matrixSum.m01.ToString();
@@ -492,36 +539,37 @@ public class uiHandler : MonoBehaviour{
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield31").GetComponentInChildren<InputField>().text = matrixSum.m31.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield32").GetComponentInChildren<InputField>().text = matrixSum.m32.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield33").GetComponentInChildren<InputField>().text = matrixSum.m33.ToString();
-         
+
     }
-    void btSumSubClick(){
+    void btSumSubClick()
+    {
         GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "-";
-        var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text), 
+        var Col0 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text));
-        
-        var Col1 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text), 
+
+        var Col1 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text));
-        
-        var Col2 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text), 
+
+        var Col2 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text));
-        
-        var Col3 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text), 
-                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text), 
+
+        var Col3 = new Vector4(float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text),
+                               float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text),
                                float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield33").GetComponentInChildren<InputField>().text) - float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text));
 
         matrixSum.SetColumn(0, Col0);
         matrixSum.SetColumn(1, Col1);
         matrixSum.SetColumn(2, Col2);
-        matrixSum.SetColumn(3, Col3);       
+        matrixSum.SetColumn(3, Col3);
 
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield00").GetComponentInChildren<InputField>().text = matrixSum.m00.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield01").GetComponentInChildren<InputField>().text = matrixSum.m01.ToString();
@@ -539,9 +587,10 @@ public class uiHandler : MonoBehaviour{
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield31").GetComponentInChildren<InputField>().text = matrixSum.m31.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield32").GetComponentInChildren<InputField>().text = matrixSum.m32.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield33").GetComponentInChildren<InputField>().text = matrixSum.m33.ToString();
-         
+
     }
-    void btSumMultClick(){
+    void btSumMultClick()
+    {
         GameObject.Find("/Canvas/pnMath/lbEqual").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").SetActive(true);
         GameObject.Find("/Canvas/pnMath/lbSig").GetComponentInChildren<Text>().text = "*";
@@ -549,81 +598,81 @@ public class uiHandler : MonoBehaviour{
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text)) +
-             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text))), 
-            
+             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text))),
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield00").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield10").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield20").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield33").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield30").GetComponentInChildren<InputField>().text))));
-        
+
         var Col1 = new Vector4(
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text)) +
-             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text))), 
-            
+             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text))),
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield01").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield11").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield21").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield33").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield31").GetComponentInChildren<InputField>().text))));
-        
+
         var Col2 = new Vector4(
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text)) +
-             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text))), 
-            
+             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text))),
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield02").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield12").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield22").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield33").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield32").GetComponentInChildren<InputField>().text))));
-        
+
         var Col3 = new Vector4(
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield00").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield01").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield02").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text)) +
-             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text))), 
-            
+             (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield03").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text))),
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield10").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield11").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield12").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield13").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield20").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield21").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield22").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield23").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield33").GetComponentInChildren<InputField>().text))),
-            
+
             ((float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield30").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield03").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield31").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield13").GetComponentInChildren<InputField>().text)) +
              (float.Parse(GameObject.Find("/Canvas/pnMath/MatrixAnt/mafield32").GetComponentInChildren<InputField>().text) * float.Parse(GameObject.Find("/Canvas/pnMath/MatrixSum/mbfield23").GetComponentInChildren<InputField>().text)) +
@@ -632,7 +681,7 @@ public class uiHandler : MonoBehaviour{
         matrixSum.SetColumn(0, Col0);
         matrixSum.SetColumn(1, Col1);
         matrixSum.SetColumn(2, Col2);
-        matrixSum.SetColumn(3, Col3);       
+        matrixSum.SetColumn(3, Col3);
 
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield00").GetComponentInChildren<InputField>().text = matrixSum.m00.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield01").GetComponentInChildren<InputField>().text = matrixSum.m01.ToString();
@@ -650,9 +699,10 @@ public class uiHandler : MonoBehaviour{
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield31").GetComponentInChildren<InputField>().text = matrixSum.m31.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield32").GetComponentInChildren<InputField>().text = matrixSum.m32.ToString();
         GameObject.Find("/Canvas/pnMath/MatrixPos/mcfield33").GetComponentInChildren<InputField>().text = matrixSum.m33.ToString();
-         
+
     }
-    void btPegaSumClick(){
+    void btPegaSumClick()
+    {
         field00.text = matrixSum.m00.ToString();
         field01.text = matrixSum.m01.ToString();
         field02.text = matrixSum.m02.ToString();
@@ -671,7 +721,7 @@ public class uiHandler : MonoBehaviour{
         field30.text = matrixSum.m30.ToString();
         field31.text = matrixSum.m31.ToString();
         field32.text = matrixSum.m32.ToString();
-        field33.text = matrixSum.m33.ToString();  
+        field33.text = matrixSum.m33.ToString();
         SumPanel.SetActive(false);
     }
 }
