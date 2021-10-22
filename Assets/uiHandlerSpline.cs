@@ -1,34 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-
-public class Line : MonoBehaviour {
-
-	public Vector3 p0, p1;
-}
-
-[CustomEditor(typeof(Line))]
-public class LineInspector : Editor {
-    private void OnSceneGUI () {
-		Line line = target as Line;
-
-		Handles.color = Color.white;
-		Handles.DrawLine(line.p0, line.p1);
-	}
-}
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class uiHandlerSpline : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Button btVoltar;
+
     void Start()
     {
-        
+        btVoltar.onClick.AddListener(btVoltarClick);
+        GameObject.Find("/Canvas/uQtdPoints").GetComponent<InputField>().text = "10";
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+    void btVoltarClick()
+    {
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 }

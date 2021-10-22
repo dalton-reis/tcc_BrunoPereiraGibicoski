@@ -60,15 +60,26 @@ public class uiHandler : MonoBehaviour
 
     private int wCubeIndex;
     private Color cor;
-    private float strToFloat(InputField prImp)
+    public static float strToFloat(InputField prImp)
     {
-        if ((prImp.text == null) | (prImp.text == ""))
+        if ((prImp.text == null) | (prImp.text.Trim() == "") | (prImp.text.Trim() == "-"))
         {
             return 0;
         }
         else
         {
             return float.Parse(prImp.text);
+        }
+    }
+    public static int strToInt(InputField prImp)
+    {
+        if ((prImp.text == null) | (prImp.text.Trim() == "") | (prImp.text.Trim() == "-"))
+        {
+            return 0;
+        }
+        else
+        {
+            return int.Parse(prImp.text);
         }
     }
     void OnDrawGizmos()
@@ -88,6 +99,7 @@ public class uiHandler : MonoBehaviour
         btReset.onClick.AddListener(btResetClick);
         btCores.onClick.AddListener(btCoresClick);
         btInsert.onClick.AddListener(btInsertClick);
+        btDelete.onClick.AddListener(btDeleteClick);
         btSum.onClick.AddListener(btSumClick);
         btCloseSum.onClick.AddListener(btCloseSumClick);
         btSumSum.onClick.AddListener(btSumSumClick);
@@ -130,7 +142,7 @@ public class uiHandler : MonoBehaviour
         allObjects.Add(m);
         xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
                        "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
-                       "Z:" + allObjects[wCubeIndex].cube.transform.position.z;
+                       "/Z:" + allObjects[wCubeIndex].cube.transform.position.z;
     }
 
     void btVoltarClick()
@@ -217,7 +229,7 @@ public class uiHandler : MonoBehaviour
     void btInsertClick()
     {
         //Rotina que insere mais um polígono
-        wCubeIndex = wCubeIndex + 1;
+        wCubeIndex = allObjects.Count;
         btCoresClick();
         btResetClick();
         matriz m = new matriz(wCubeIndex, matrix, cor);
@@ -258,9 +270,6 @@ public class uiHandler : MonoBehaviour
         matrix.SetColumn(1, Col1);
         matrix.SetColumn(2, Col2);
         matrix.SetColumn(3, Col3);
-
-        Debug.Log("Restart:");
-        Debug.Log(matrix.ToString());
     }
     void btDeleteClick()
     {
@@ -269,6 +278,18 @@ public class uiHandler : MonoBehaviour
         {
             Destroy(allObjects[wCubeIndex].cube);
             allObjects.Remove(allObjects[wCubeIndex]);
+            if (allObjects.Count > wCubeIndex)
+            {
+                foreach (matriz m in allObjects)
+
+                {
+                    if (allObjects[wCubeIndex].index <= m.index)
+                    {
+                        m.index = m.index - 1;
+                        m.cube.name = m.index.ToString();
+                    }
+                }
+            }
             wCubeIndex = allObjects.Count - 1;
             cor = allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color;
             matrix = allObjects[wCubeIndex].matrix;
@@ -303,8 +324,6 @@ public class uiHandler : MonoBehaviour
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (hit)
             {
-                //Debug.Log("name: " + hitInfo.transform.gameObject.name);
-                //Debug.Log("tag: " + hitInfo.transform.gameObject.tag);
                 if (hitInfo.transform.gameObject.tag == "Cube")
                 {
                     wCubeIndex = int.Parse(hitInfo.transform.gameObject.name);
@@ -327,15 +346,9 @@ public class uiHandler : MonoBehaviour
                     field32.text = matrix.m32.ToString();
                     field33.text = matrix.m33.ToString();
                 }
-                else
-                {
-                    //Debug.Log ("nopz " + hitInfo.transform.gameObject.tag);
-                }
             }
-            //else {
-            //    Debug.Log("No hit");
-            //}
         }
+
         allObjects[wCubeIndex].cube.GetComponent<Renderer>().material.color = cor;
 
         var Col0 = new Vector4(strToFloat(field00), strToFloat(field10), strToFloat(field20), strToFloat(field30));
@@ -374,7 +387,6 @@ public class uiHandler : MonoBehaviour
         position.z = matrix.m23;
         allObjects[wCubeIndex].cube.transform.position = position;
         allObjects[wCubeIndex].matrix = matrix;
-        Debug.Log(matrix.ToString());
 
         xyzShow.text = "X:" + allObjects[wCubeIndex].cube.transform.position.x +
                        "/Y:" + allObjects[wCubeIndex].cube.transform.position.y +
