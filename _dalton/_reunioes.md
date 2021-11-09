@@ -51,3 +51,80 @@ Subir o código no Git.
 [x] Arrumou setas usando RGB.  
 [x] Tutorial: hints para mostrar o que foi usado para fazer o caculo da matriz.
   [ ] Está fazendo os Hints da tabela de calculo. Vai mlehorar mostrando cores para saber qual linha com qual coluna.  
+
+## ATENÇÃO
+
+[@BrunoPG] pedir para remover pasta https://github.com/BrunoPG/BrunoPereiraGibicoski/tree/master/Library
+do Git dele.. conferir as outras.
+
+## 2021-09-14
+
+[ ] Tutorial: usar video.  Funciona, teve que autalizar o Unity e o render para Vulkan.  
+[x] Otimizou o código para os Hitens ... otimizou.  
+
+## 2021-09-21
+
+Disse que não produziu muito e não precisava de reunião.  
+
+## 2021-09-28
+
+Arrumou um pouco mais a parte do play do video para o tutorial.  
+Vai usar um programa para editar os videos dos tutorias para colocar umas legendas, etc.  
+
+Spline fez. Vai fazer o tutorial para spline.  
+Tutorial na spline.  
+
+## 2021-10-05
+
+- desmarquei.  
+
+## 2021-10-12
+
+- feriado.  
+
+## 2021-10-19
+
+Vai terminar as rotinas e me avisar que tem uma versão no GitHub para eu testar.  
+
+## 2021-10-26
+
+Oi Bruno Pereira Gibicoski, hoje as 22:00 tenho bancas de TCC1 e não vou conseguir conversar contigo hoje.  
+Faz assim, continua trabalhando nas rotinas que ainda faltam para terminar ... mas tenta voltar a pegar o texto. Procura produzir um pouco do conteúdo do artigo ... principalmente da seção 3.  
+Se julgares que precisamos remarcar a reunião de hoje em um outro dia/horário me avise.  
+
+## 2021-11-09
+
+Porque tem um ".gitignore" com extensão "txt"?  
+Do audio já passado que descrevo o que seri aum TCC o que realmente fez?  
+[Audio](<https://github.com/dalton-reis/tcc_BrunoPereiraGibicoski/blob/master/_dalton/2020-09-09_Reuniao.m4a> "Audio")  
+
+- Como não integrou ao código já existente do TCC anterior deveria ter mais funçoes.  
+- Matriz 4x4  
+  - o que seria o texto "Demo"?  
+  - texto dos botões em português e inglês!  
+  - como faz para mover a câmera (pelas setas)?  
+  - depois de inserir mais de um objeto (no 3 objeto) não muda mais de cor.  
+  - não entendi como usa o botão "Transposta" para explicar algo na área de CG.  
+  - no botão "calculo" ... que está escrito errado "cálculo".  
+    - para que seria o botão "Somar" e Subtrair" para explicar algo na área de CG.  
+    - deixar sempre a matriz quando não tivere valroes como matriz identidade.  
+      - segunda matriz do "Cálculo".  
+  - Spline  
+    - qual foi o critério da escolha da posição (x,y,z) dos pontos de controle?  
+      - seria melhor usar um padrão simétrico para valores iniciais.  
+      - me parece que está com erro quando se tem mais pontos de controle.  
+    - não tem como mudar os valores dos pontos de controle?  
+  - Tutorial  
+    - eram o vídeos, mas como eu uso?  
+
+- Deploy:  
+  - [ ] Android (erro).  
+  - [ ] iOS
+  - [x] Windows  
+  - [ ] MacOS
+  - [ ] WebGL (erro).
+
+
+  O que poderia ser melhorado:
+
+  - ter um controle de câmera melhor ... poder ter câmera do tipo Study, Zoom Extend, etc.  
