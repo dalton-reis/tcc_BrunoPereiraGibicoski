@@ -98,23 +98,29 @@ Porque tem um ".gitignore" com extensão "txt"?
 Do audio já passado que descrevo o que seri aum TCC o que realmente fez?  
 [Audio](<https://github.com/dalton-reis/tcc_BrunoPereiraGibicoski/blob/master/_dalton/2020-09-09_Reuniao.m4a> "Audio")  
 
-- Como não integrou ao código já existente do TCC anterior deveria ter mais funçoes.  
+- [+/-] Como não integrou ao código já existente do TCC anterior deveria ter mais funções.  
 - Matriz 4x4  
   - o que seria o texto "Demo"?  
+    .. remover e melhorar o texto que exibe a posição do objeto no espaço.  
+  - "descrever" que pode selecionar os objetos com o click esq mouse.  
+  - "descrever" que pode mover a câmera com o click dir mouse.  
+  - colocar um borda para realçar o objeto selecionado.  
   - texto dos botões em português e inglês!  
-  - como faz para mover a câmera (pelas setas)?  
-  - depois de inserir mais de um objeto (no 3 objeto) não muda mais de cor.  
+  - tratar conflito entre selecionar botão (no canvas) também seleciona um bojeto atrás.  
+  - [e] falta a transparência da cor.  
   - não entendi como usa o botão "Transposta" para explicar algo na área de CG.  
   - no botão "calculo" ... que está escrito errado "cálculo".  
-    - para que seria o botão "Somar" e Subtrair" para explicar algo na área de CG.  
-    - deixar sempre a matriz quando não tivere valroes como matriz identidade.  
+    - REMOVER -> para que seria o botão "Somar" e Subtrair" para explicar algo na área de CG.  
+    - deixar sempre a segunda da multiplicação como matriz identidade.  
       - segunda matriz do "Cálculo".  
+  - botão resetar câmera.  
   - Spline  
     - qual foi o critério da escolha da posição (x,y,z) dos pontos de controle?  
-      - seria melhor usar um padrão simétrico para valores iniciais.  
+      usar a posição dos veétices das figuras geométricas (triângulo, quadrado, ) .. levar p/ o artigo.  
       - me parece que está com erro quando se tem mais pontos de controle.  
-    - não tem como mudar os valores dos pontos de controle?  
-  - Tutorial  
+    - não tem como mudar os valores dos pontos de controle? Vai arrumar.  
+  - botão resetar câmera.  
+  - Tutorial  .. ajustar.  
     - eram o vídeos, mas como eu uso?  
 
 - Deploy:  
@@ -124,7 +130,6 @@ Do audio já passado que descrevo o que seri aum TCC o que realmente fez?
   - [ ] MacOS
   - [ ] WebGL (erro).
 
-
   O que poderia ser melhorado:
-
+Extensão:
   - ter um controle de câmera melhor ... poder ter câmera do tipo Study, Zoom Extend, etc.  
