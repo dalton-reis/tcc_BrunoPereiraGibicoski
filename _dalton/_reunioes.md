@@ -133,3 +133,25 @@ Do audio já passado que descrevo o que seri aum TCC o que realmente fez?
   O que poderia ser melhorado:
 Extensão:
   - ter um controle de câmera melhor ... poder ter câmera do tipo Study, Zoom Extend, etc.  
+
+# 2021-11-16
+
+Não fizemos reunião porque ainda tinha "tarefas" para fazer da última reunião. Remarcarmos para sexta.  
+Me passou o que está fazendo: _________________  
+só pra te atualizar, o que falta é:  
+segunda matriz do "Cálculo". - > ja consi...  
+segunda matriz do "Cálculo". - > ja consigo criar o ponto e interagir com ele, mas ainda falta a parte do cálculo  
+me parece que está com erro quando se tem...  
+me parece que está com erro quando se tem mais pontos de controle. -> tem um erro no calculo das splines para splines com 7 ou mais pontos de apoio  
+tratar conflito entre selecionar botão (n...  
+tratar conflito entre selecionar botão (no canvas) também seleciona um bojeto atrás. -> falta corrigir isso  
+e só, todos os outros itens ja estão pronto...  
+e só, todos os outros itens ja estão prontos e funcionais  
+até a transparência  
+fiz um "help" no paint pra demonstrar os co... , com um anexo.  
+fiz um "help" no paint pra demonstrar os comandos e criei um botão dedicado  
+  help.png  
+ah, uma duvida que queria ver contigo, o na multiplicação do ponto, quando tiver selecionando um ponto e apertar em multiplicar, é para abrir uma tela de multiplicação entre uma matriz 4x4 e uma matriz 1x4 referente ao ponto  
+o resultado disso, é pra ser uma matriz que vai substituir o ponto, certo?  
+digo, um objeto gráfico com a matriz 4x4  
+só pra confirmar se entendi corretamente  
