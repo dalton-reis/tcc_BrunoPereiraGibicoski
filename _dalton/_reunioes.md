@@ -155,3 +155,12 @@ ah, uma duvida que queria ver contigo, o na multiplicação do ponto, quando tiv
 o resultado disso, é pra ser uma matriz que vai substituir o ponto, certo?  
 digo, um objeto gráfico com a matriz 4x4  
 só pra confirmar se entendi corretamente  
+
+## 2022-03-16
+
+Não mexeu nada do semestre anterior.  
+Arrumou o GitHub.  
+@dalton-reis: vai olhar o que ele fez na implementação.  Baixar o novo fonte od GitHub.  
+
+Vai trabalhar no artigo.  
+<https://github.com/BrunoPG/BrunoPereiraGibicoski/blob/master/Artigo/TccArtigo.docx>  
