@@ -8,6 +8,7 @@ TagManager:
   - editSomaMa
   - editSomaMb
   - editSomaMc
+  - Point
   layers:
   - Default
   - TransparentFX

@@ -7,38 +7,59 @@ public class CameraScript : MonoBehaviour
     public float speedh;
     public float speedv;
     public float sens;
-    private float yaw = 225.0f;
-    private float pitch = 0.0f;
-    private float Zew = 0.0f;
-    private GameObject MyCamera;
+    public float Yaw;
+    public float Pitch;
+    public float Zew;
+    private float StartYaw;
+    private float StartPitch;
+    private float StartZew;
+    private Vector3 myCamPos;
     // Start is called before the first frame update
     void Start()
     {
-      MyCamera = GameObject.Find("Main Camera");  
+      myCamPos   = transform.position;
+      StartYaw   = Yaw;
+      StartPitch = Pitch;
+      StartZew   = Zew;
+      
+      ResetCam();
     }
 
+    void ResetCam(){       
+        transform.position = myCamPos;     
+        
+        Yaw   = StartYaw;
+        Pitch = StartPitch;
+        Zew   = StartZew;   
+        transform.eulerAngles = new Vector3(Pitch, Yaw, Zew);
+        //transform.LookAt(Vector3.zero);
+    }
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKey(KeyCode.R)){
+            ResetCam();
+        }
         if (Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.UpArrow)){
-            MyCamera.transform.Translate(Vector3.forward * sens);
+            transform.Translate(Vector3.forward * sens);
         //transform.position = ;
         }
         if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow)){
-           MyCamera.transform.Translate(Vector3.left * sens);
+           transform.Translate(Vector3.left * sens);
         }
         if (Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.DownArrow)){
-           MyCamera.transform.Translate(Vector3.back * sens);
+           transform.Translate(Vector3.back * sens);
         }
         if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow)){
-           MyCamera.transform.Translate(Vector3.right * sens);
+           transform.Translate(Vector3.right * sens);
         }
 
         if (Input.GetMouseButton(1)){
-        yaw += speedh * Input.GetAxis("Mouse X");
-        pitch -= speedv * Input.GetAxis("Mouse Y");
+        Yaw += speedh * Input.GetAxis("Mouse X");
+        Pitch -= speedv * Input.GetAxis("Mouse Y");
 
-        transform.eulerAngles = new Vector3(pitch, yaw, Zew);
+        transform.eulerAngles = new Vector3(Pitch, Yaw, Zew);
         }
     }
 }
