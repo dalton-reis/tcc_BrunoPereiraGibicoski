@@ -164,3 +164,8 @@ Arrumou o GitHub.
 
 Vai trabalhar no artigo.  
 <https://github.com/BrunoPG/BrunoPereiraGibicoski/blob/master/Artigo/TccArtigo.docx>  
+
+## 2022-03-23
+
+Pedi para produzir o texto, e não fez cada nada.
+Trabalhando no Texto: prazo 2 semanas para terminar o Requisitos.  
