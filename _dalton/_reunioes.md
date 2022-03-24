@@ -167,5 +167,9 @@ Vai trabalhar no artigo.
 
 ## 2022-03-23
 
-Pedi para produzir o texto, e não fez cada nada.
+Conversamos um pouco ... sobre sua situação.  
+Ofereci o atendimento presencial.  
+Disse que estava tendo auxilio de um pscicologo, mas só tinha ido dois encontros (nas segundas).  
+
+Pedi para produzir o texto, e não fez cada nada.  
 Trabalhando no Texto: prazo 2 semanas para terminar o Requisitos.  
