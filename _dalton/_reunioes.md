@@ -173,3 +173,14 @@ Disse que estava tendo auxilio de um pscicologo, mas só tinha ido dois encontro
 
 Pedi para produzir o texto, e não fez cada nada.  
 Trabalhando no Texto: prazo 2 semanas para terminar o Requisitos.  
+
+## 2022-03-30
+
+Não fez nada e não tinha dúvidas e pediu para usar as duas semanas que era para fazer a especificação. Então na próxima semana vai entregar algo.  
+
+## 2022-04-06
+
+Não fez nada do texto.  Disse que mexeu um pouco arrumando o código e comentado. Mas do texto não mexeu.  
+Comentou novamente que falou com a Psicologa que deu sujestões para melhorar.  
+Vai tentar seguir as dicas da Psicologa e produzir alguma coisa para próxima semana.  
+Questionei se queria vir presencial.  
