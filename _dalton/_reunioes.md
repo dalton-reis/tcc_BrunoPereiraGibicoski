@@ -184,3 +184,36 @@ Não fez nada do texto.  Disse que mexeu um pouco arrumando o código e comentad
 Comentou novamente que falou com a Psicologa que deu sujestões para melhorar.  
 Vai tentar seguir as dicas da Psicologa e produzir alguma coisa para próxima semana.  
 Questionei se queria vir presencial.  
+
+## 2022-04-20
+
+Bruno __  
+Enviar DOCX atualizado com partes feitas na semana anterior.  
+
+Dalton __  
+Revisar o texto acima  
+
+Bruno__  
+Ler estes materiais  
+<http://dsc.inf.furb.br/arquivos/tccs/monografias/2013_2_jose-ricardo-krauss_monografia.pdf>  
+<http://dsc.inf.furb.br/arquivos/tccs/monografias/2014_2_osvaldo-bay-machado_monografia.pdf>  
+<http://dsc.inf.furb.br/arquivos/tccs/monografias/2020_1_peterson-boni-buttenberg_monografia.pdf>  
+  seção 2.4  
+
+E escrever na seção 2 sobre o VisEdu-CG  
+
+## 2022-04-27
+
+Dalton mostrar a revisão  
+
+Bruno __  
+Olhar exemplo de artigo sobre está seção.  
+
+Seção de Análise dos Resultados (3.4)  
+.. alguns testes do Bruno (do desenvolvedor  
+3.4.1 Uma comparação com o VisEdu-CG (por isto está descrevendo no seção 2).  
+3.4.2 Teste de Usabilidade  
+
+## Futuro ___
+
+Talvez tem que aumentar um pouquinho do texto na seção 2.  
