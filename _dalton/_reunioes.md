@@ -210,6 +210,15 @@ Envie a revisão que ia mostrar pessoalmente por e-mail: [tcc_BrunoPereiraGibico
 ## 2022-05-04
 
 Semana Cadêmica ... avisei por e-mail que não ia ter reunião.  
+Oi, Bruno, segue em anexo a revisão do artigo conforme texto disponibilizado no seu GitHub.  
+
+Fiquei te aguardando na semana passada no nosso dia/horário (27/04 as 22:00 no DSC) programado semanalmente para atendimento do TCC2 e NÃO aparecesse (e não avisasse que não viria).  
+Bom, segue a revisão ...  
+
+Conforme avisei na semana passada, está semana temos a Semana Acadêmica do BCC e SIS e não teremos atendimento do TCC2, pois estarei no participando do evento. Peço que arrume as correções feitas nesta revisão para trazeres no dia 11/05 as 22:00 no DSC.  
+
+Atte.  
+
 
 ## 2022-05-11
 
