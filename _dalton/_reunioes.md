@@ -204,6 +204,15 @@ E escrever na seção 2 sobre o VisEdu-CG
 
 ## 2022-04-27
 
+NÃO APARECEU  
+Envie a revisão que ia mostrar pessoalmente por e-mail: [tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf](./tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf "tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf" )  
+
+## 2022-05-04
+
+Semana Cadêmica ... avisei por e-mail que não ia ter reunião.  
+
+## 2022-05-11
+
 Dalton mostrar a revisão  
 
 Bruno __  
