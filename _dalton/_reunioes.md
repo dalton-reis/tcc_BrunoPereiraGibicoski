@@ -205,7 +205,7 @@ E escrever na seção 2 sobre o VisEdu-CG
 ## 2022-04-27
 
 NÃO APARECEU  
-Envie a revisão que ia mostrar pessoalmente por e-mail: [tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf](./tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf "tcc_BrunoPereiraGibicoski_2022-04-27_artigo_Dalton.pdf" )  
+Envie a revisão que ia mostrar pessoalmente por e-mail: [2022-04-27_artigo_Dalton.pdf](./2022-04-27_artigo_Dalton.pdf "2022-04-27_artigo_Dalton.pdf" )  
 
 ## 2022-05-04
 
@@ -235,3 +235,8 @@ Seção de Análise dos Resultados (3.4)
 ## Futuro ___
 
 Talvez tem que aumentar um pouquinho do texto na seção 2.  
+
+## 2022-09-26 - 16:11
+
+Mensagem enviada para Orientando e prof. de TCC2.  
+[2022-09-26_mscTCC2](2022-09-26_mscTCC2.pdf "2022-09-26_mscTCC2")  
